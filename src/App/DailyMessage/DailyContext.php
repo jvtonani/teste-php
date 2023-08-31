@@ -7,7 +7,11 @@ class DailyContext {
 
     public function setStrategy (DailyStrategyI $strategy) 
     {
-        $this->strategy = $strategy;
+        try {
+            $this->strategy = $strategy;
+        } catch (\Exception $e) {
+            return false;
+        }
     }
 
     public function executeStrategy() 

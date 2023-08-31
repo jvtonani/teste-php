@@ -1,14 +1,30 @@
 <?php
 
-use App\DailyMessage\DailyStrategyGeneric;
+namespace App\DailyMessage;
+use App\DailyMessage\MondayStrategy;
 class WeekDay 
 {
     private $days;
-    public function setDays () {
+    
+    public function __construct() {
+        $this->setDays();
+    }
+    private function setDays () {
         $this->days = [
-            'segunda' => new DailyStrategyGeneric()
+            'monday' => new MondayStrategy(),
+            //TODO Adicionar dias da semana
         ];
     } 
+
+    public function getWeekStrategy($day) {
+        return $this->days[$day];
+    }
+
+
+    private function verifyHolidayRule($day) {
+        //TODO Adicionar validação
+        return true;
+    }
 
     
 }

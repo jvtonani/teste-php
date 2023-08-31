@@ -1,0 +1,27 @@
+version: '3.8'
+services:
+  php-apache-environment:
+    container_name: teste-tecnico-php
+    image: php:8.2-apache
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    depends_on:
+      - db
+    volumes:
+      - ./src:/var/www/html/
+    ports:
+      - 8000:80
+  db:
+    image: postgres
+    restart: always 
+    environment:
+      POSTGRES_PASSWORD: teste_tecnico
+    ports:
+      - 5432:5432
+    volumes:
+      - teste-tecnico:/var/lib/postgresql/data
+
+volumes:
+  teste-tecnico:
+    name: teste-tecnico
